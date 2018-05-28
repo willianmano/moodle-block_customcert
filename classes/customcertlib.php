@@ -45,11 +45,11 @@ class customcertlib {
         global $DB, $USER;
 
         $sql = "SELECT ci.id, cm.id as cmid, ci.code, co.fullname as coursename, c.name, ci.timecreated
-                FROM mdl_customcert_issues ci
-                INNER JOIN mdl_customcert c ON c.id = ci.customcertid
-                INNER JOIN mdl_course_modules cm ON cm.instance = c.id
-                INNER JOIN mdl_modules m ON cm.module = m.id
-                INNER JOIN mdl_course co ON co.id = cm.course
+                FROM {customcert_issues} ci
+                INNER JOIN {customcert} c ON c.id = ci.customcertid
+                INNER JOIN {course_modules} cm ON cm.instance = c.id
+                INNER JOIN {modules} m ON cm.module = m.id
+                INNER JOIN {course} co ON co.id = cm.course
                 WHERE ci.userid = :userid AND m.name = 'customcert'";
 
         $params['userid'] = $USER->id;
