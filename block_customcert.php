@@ -88,7 +88,15 @@ class block_customcert extends block_base {
 
         $this->content->text = $renderer->render($renderable);
 
-        $this->content->footer .= '';
+        $this->content->footer .= html_writer::tag('p',
+            html_writer::link(
+                new moodle_url(
+                    '/blocks/customcert/issuedcertificates.php'
+                ),
+                get_string('issuedcertificates', 'block_customcert'),
+                array('class' => 'btn btn-default')
+            )
+        );
 
         return $this->content;
     }

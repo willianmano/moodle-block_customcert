@@ -29,3 +29,7 @@ $string['certificate'] = 'Certificate';
 $string['code'] = 'Code';
 $string['date_issued'] = 'Date Issued';
 $string['nocertificates'] = 'No certificates issued yet.';
+$string['issuer'] = 'Issuer';
+$string['credits'] = 'Credits';
+$string['download'] = 'Download';
+$string['issuedcertificates'] = 'All issued certificates';

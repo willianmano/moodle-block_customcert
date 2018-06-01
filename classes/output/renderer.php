@@ -51,4 +51,18 @@ class renderer extends plugin_renderer_base {
 
         return parent::render_from_template('block_customcert/block', $data);
     }
+
+    /**
+     * Defer the issued certificates page to template.
+     *
+     * @param renderable $page
+     *
+     * @return string
+     * @throws \moodle_exception
+     */
+    public function render_issuedcertificates_page(renderable $page) {
+        $data = $page->export_for_template($this);
+
+        return parent::render_from_template('block_customcert/issuedcertificates_page', $data);
+    }
 }

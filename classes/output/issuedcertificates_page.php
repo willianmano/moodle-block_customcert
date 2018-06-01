@@ -31,13 +31,13 @@ use templatable;
 use renderer_base;
 
 /**
- * Custom certificate block renderable class.
+ * Issued certificates page renderable class.
  *
  * @package    block_customcert
  * @copyright  2018 Willian Mano http://conecti.me
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block implements renderable, templatable {
+class issuedcertificates_page implements renderable, templatable {
 
     /** @var array certificates. */
     protected $certificates;
@@ -50,7 +50,7 @@ class block implements renderable, templatable {
      * @return void
      */
     public function __construct() {
-        $this->certificates = customcertlib::get_certificates(5);
+        $this->certificates = customcertlib::get_certificates_withcourseinfo();
     }
 
     /**
@@ -61,18 +61,19 @@ class block implements renderable, templatable {
      * @return array
      */
     public function export_for_template(renderer_base $output) {
-        $dateformat = get_string('strftimedate', 'langconfig');
-
         $certificates = [];
+
         if (count($this->certificates) > 0) {
             foreach ($this->certificates as $certificate) {
                 $certificates[] = [
                     'id' => $certificate->id,
                     'cmid' => $certificate->cmid,
                     'code' => $certificate->code,
-                    'coursename' => mb_strimwidth($certificate->coursename, 0, 30, "..."),
+                    'coursename' => $certificate->coursename,
                     'name' => $certificate->name,
-                    'timecreated' => userdate($certificate->timecreated,$dateformat)
+                    'category' => $certificate->category,
+                    'credits' => $certificate->credits,
+                    'year' => date('Y', $certificate->timecreated)
                 ];
             }
         }

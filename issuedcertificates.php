@@ -14,22 +14,39 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
- * Custom certificate block english language pack
+ * Custom certificate block - All issued certificates page
  *
  * @package    block_customcert
  * @copyright  2018 Willian Mano http://conecti.me
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Custom certificate';
-$string['customcert:addinstance'] = 'Add a new custom certificate block';
-$string['certificate'] = 'Certificate';
-$string['code'] = 'Code';
-$string['date_issued'] = 'Date Issued';
-$string['nocertificates'] = 'No certificates issued yet.';
-$string['issuer'] = 'Issuer';
-$string['credits'] = 'Credits';
-$string['download'] = 'Download';
-$string['issuedcertificates'] = 'All issued certificates';
+require(__DIR__ . '/../../config.php');
+
+require_login();
+
+$context = context_system::instance();
+
+$url = new moodle_url('/blocks/customcert/issuedcertificates.php');
+$PAGE->set_context($context);
+$PAGE->set_url($url);
+$PAGE->set_title(get_string('issuedcertificates', 'block_customcert'));
+$PAGE->set_pagelayout('course');
+
+// Add the page nav to breadcrumb.
+$PAGE->navbar->add(get_string('issuedcertificates', 'block_customcert'));
+
+$output = $PAGE->get_renderer('block_customcert');
+
+echo $output->header();
+echo $output->heading(get_string('issuedcertificates', 'block_customcert'));
+echo $output->container_start('customcert-issuedcertificates');
+
+$page = new \block_customcert\output\issuedcertificates_page();
+
+echo $output->render($page);
+
+echo $output->container_end();
+
+echo $OUTPUT->footer();

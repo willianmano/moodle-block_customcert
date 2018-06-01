@@ -15,9 +15,9 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template block_customcert/block
+    @template block_customcert/issuedcertificates_page
 
-    Print the block.
+    Print the issued certificates page.
 
     Example context (json):
     {
@@ -31,29 +31,35 @@
         }]
     }
 }}
+
 <table class="table table-striped generaltable table-hover">
     <thead>
-        <tr>
-            <th>{{#str}} certificate, block_customcert{{/str}}</th>
-            <th>{{#str}} date_issued, block_customcert{{/str}}</th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>{{#str}} course, core {{/str}}</th>
+        <th>{{#str}} issuer, block_customcert {{/str}}</th>
+        <th>{{#str}} credits, block_customcert {{/str}}</th>
+        <th>{{#str}} year, core {{/str}}</th>
+        <th>{{#str}} download, block_customcert {{/str}}</th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        {{#certificates}}
-            <tr>
-                <td><strong>{{{coursename}}}</strong><br>{{{name}}}</td>
-                <td>{{{timecreated}}}</td>
-                <td>
-                    <form method="post" action="{{{config.wwwroot}}}/mod/customcert/view.php">
-                        <input type="hidden" name="id" value="{{{cmid}}}">
-                        <input type="hidden" name="action" value="download">
-                        <input type="hidden" name="sesskey" value="{{{config.sesskey}}}">
-                        <button type="submit" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i></button>
-                    </form>
-                </td>
-            </tr>
-        {{/certificates}}
+    {{#certificates}}
+        <tr>
+            <td>{{{coursename}}}</td>
+            <td>{{{category}}}</td>
+            <td>{{{credits}}}{{^credits}}-{{/credits}}</td>
+            <td>{{{year}}}</td>
+            <td>
+                <form method="post" action="{{{config.wwwroot}}}/mod/customcert/view.php">
+                    <input type="hidden" name="id" value="{{{cmid}}}">
+                    <input type="hidden" name="action" value="download">
+                    <input type="hidden" name="sesskey" value="{{{config.sesskey}}}">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> {{#str}} download, block_customcert {{/str}}</button>
+                </form>
+            </td>
+        </tr>
+    {{/certificates}}
     </tbody>
 </table>
 

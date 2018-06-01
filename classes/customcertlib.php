@@ -41,7 +41,7 @@ class customcertlib {
      *
      * @throws \dml_exception
      */
-    public static function get_certificates() {
+    public static function get_certificates($limit = null) {
         global $DB, $USER;
 
         $sql = "SELECT ci.id, cm.id as cmid, ci.code, co.fullname as coursename, c.name, ci.timecreated
@@ -50,10 +50,55 @@ class customcertlib {
                 INNER JOIN {course_modules} cm ON cm.instance = c.id
                 INNER JOIN {modules} m ON cm.module = m.id
                 INNER JOIN {course} co ON co.id = cm.course
-                WHERE ci.userid = :userid AND m.name = 'customcert'";
+                WHERE ci.userid = :userid AND m.name = 'customcert'
+                ORDER BY ci.timecreated DESC";
 
         $params['userid'] = $USER->id;
 
+        if ($limit) {
+            $sql .= " LIMIT {$limit}";
+        }
+
         return $DB->get_records_sql($sql, $params);
     }
+
+    /**
+     * Return an array with the issued user certificates
+     *
+     * @return array
+     *
+     * @throws \dml_exception
+     */
+    public static function get_certificates_withcourseinfo($limit = null) {
+        global $DB, $USER;
+
+        $sql = "SELECT
+                  ci.id,
+                  cm.id as cmid,
+                  ci.code,
+                  co.fullname as coursename,
+                  cc.name as category,
+                  cf.value as credits,
+                  c.name,
+                  ci.timecreated
+                FROM mdl_customcert_issues ci
+                INNER JOIN mdl_customcert c ON c.id = ci.customcertid
+                INNER JOIN mdl_course_modules cm ON cm.instance = c.id
+                INNER JOIN mdl_modules m ON cm.module = m.id
+                INNER JOIN mdl_course co ON co.id = cm.course
+                INNER JOIN mdl_course_categories cc ON cc.id = co.category
+                LEFT JOIN mdl_course_format_options cf ON (cf.courseid = co.id AND cf.name = 'unicoursecredits')
+                WHERE ci.userid = :userid AND m.name = 'customcert'
+                ORDER BY ci.timecreated DESC";
+
+        $params['userid'] = $USER->id;
+
+        if ($limit) {
+            $sql .= " LIMIT {$limit}";
+        }
+
+        return $DB->get_records_sql($sql, $params);
+    }
+
+
 }
