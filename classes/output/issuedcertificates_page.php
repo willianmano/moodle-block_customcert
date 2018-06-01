@@ -61,10 +61,18 @@ class issuedcertificates_page implements renderable, templatable {
      * @return array
      */
     public function export_for_template(renderer_base $output) {
+        $dateformat = get_string('strftimedate', 'langconfig');
+
         $certificates = [];
 
         if (count($this->certificates) > 0) {
             foreach ($this->certificates as $certificate) {
+                $grade = $certificate->grade;
+
+                if ($grade) {
+                    $grade = number_format($certificate->grade, 2);
+                }
+
                 $certificates[] = [
                     'id' => $certificate->id,
                     'cmid' => $certificate->cmid,
@@ -72,8 +80,8 @@ class issuedcertificates_page implements renderable, templatable {
                     'coursename' => $certificate->coursename,
                     'name' => $certificate->name,
                     'category' => $certificate->category,
-                    'credits' => $certificate->credits,
-                    'year' => date('Y', $certificate->timecreated)
+                    'grade' => $grade,
+                    'timecreated' => userdate($certificate->timecreated, $dateformat)
                 ];
             }
         }

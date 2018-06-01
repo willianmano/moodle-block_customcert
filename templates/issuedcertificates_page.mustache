@@ -27,18 +27,19 @@
             "code": "Qwert123",
             "coursename": "The course fullname",
             "name": "Certificate name",
+            "category": "The course category",
+            "grade": 9.00,
             "timecreated": "The certificate issue date formated"
         }]
     }
 }}
-
 <table class="table table-striped generaltable table-hover">
     <thead>
     <tr>
         <th>{{#str}} course, core {{/str}}</th>
-        <th>{{#str}} issuer, block_customcert {{/str}}</th>
-        <th>{{#str}} credits, block_customcert {{/str}}</th>
-        <th>{{#str}} year, core {{/str}}</th>
+        <th>{{#str}} category, block_customcert {{/str}}</th>
+        <th>{{#str}} grade, core {{/str}}</th>
+        <th>{{#str}} date_issued, block_customcert {{/str}}</th>
         <th>{{#str}} download, block_customcert {{/str}}</th>
         <th></th>
     </tr>
@@ -48,8 +49,8 @@
         <tr>
             <td>{{{coursename}}}</td>
             <td>{{{category}}}</td>
-            <td>{{{credits}}}{{^credits}}-{{/credits}}</td>
-            <td>{{{year}}}</td>
+            <td>{{{grade}}}{{^grade}}-{{/grade}}</td>
+            <td>{{{timecreated}}}</td>
             <td>
                 <form method="post" action="{{{config.wwwroot}}}/mod/customcert/view.php">
                     <input type="hidden" name="id" value="{{{cmid}}}">

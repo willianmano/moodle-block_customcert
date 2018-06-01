@@ -78,16 +78,17 @@ class customcertlib {
                   ci.code,
                   co.fullname as coursename,
                   cc.name as category,
-                  cf.value as credits,
+                  gg.finalgrade as grade,
                   c.name,
                   ci.timecreated
-                FROM mdl_customcert_issues ci
-                INNER JOIN mdl_customcert c ON c.id = ci.customcertid
-                INNER JOIN mdl_course_modules cm ON cm.instance = c.id
-                INNER JOIN mdl_modules m ON cm.module = m.id
-                INNER JOIN mdl_course co ON co.id = cm.course
-                INNER JOIN mdl_course_categories cc ON cc.id = co.category
-                LEFT JOIN mdl_course_format_options cf ON (cf.courseid = co.id AND cf.name = 'unicoursecredits')
+                FROM {customcert_issues} ci
+                INNER JOIN {customcert} c ON c.id = ci.customcertid
+                INNER JOIN {course_modules} cm ON cm.instance = c.id
+                INNER JOIN {modules} m ON cm.module = m.id
+                INNER JOIN {course} co ON co.id = cm.course
+                INNER JOIN {course_categories} cc ON cc.id = co.category
+                LEFT JOIN {grade_items} gi ON (gi.courseid = co.id AND gi.itemtype = 'course')
+                LEFT JOIN {grade_grades} gg ON gg.itemid = gi.id
                 WHERE ci.userid = :userid AND m.name = 'customcert'
                 ORDER BY ci.timecreated DESC";
 
