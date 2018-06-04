@@ -89,7 +89,7 @@ class customcertlib {
                 INNER JOIN {course_categories} cc ON cc.id = co.category
                 LEFT JOIN {grade_items} gi ON (gi.courseid = co.id AND gi.itemtype = 'course')
                 LEFT JOIN {grade_grades} gg ON gg.itemid = gi.id
-                WHERE ci.userid = :userid AND m.name = 'customcert'
+                WHERE ci.userid = :userid AND m.name = 'customcert' AND co.visible = 1
                 ORDER BY ci.timecreated DESC";
 
         $params['userid'] = $USER->id;
