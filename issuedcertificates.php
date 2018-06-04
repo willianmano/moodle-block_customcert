@@ -32,7 +32,7 @@ $url = new moodle_url('/blocks/customcert/issuedcertificates.php');
 $PAGE->set_context($context);
 $PAGE->set_url($url);
 $PAGE->set_title(get_string('issuedcertificates', 'block_customcert'));
-$PAGE->set_pagelayout('course');
+$PAGE->set_pagelayout('standard');
 
 // Add the page nav to breadcrumb.
 $PAGE->navbar->add(get_string('issuedcertificates', 'block_customcert'));
