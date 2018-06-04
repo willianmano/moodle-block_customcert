@@ -93,7 +93,7 @@ class block_customcert extends block_base {
                 new moodle_url(
                     '/blocks/customcert/issuedcertificates.php'
                 ),
-                get_string('issuedcertificates', 'block_customcert'),
+                get_string('allissuedcertificates', 'block_customcert'),
                 array('class' => 'btn btn-default')
             )
         );

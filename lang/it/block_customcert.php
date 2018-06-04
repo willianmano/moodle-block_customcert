@@ -25,11 +25,12 @@
 
 $string['pluginname'] = 'Custom certificate';
 $string['customcert:addinstance'] = 'Add a new custom certificate block';
-$string['certificate'] = 'Certificate';
+$string['certificate'] = 'Attestato';
 $string['code'] = 'Code';
-$string['date_issued'] = 'Date Issued';
+$string['date_issued'] = 'Data emissione';
 $string['nocertificates'] = 'No certificates issued yet.';
-$string['category'] = 'Course category';
+$string['category'] = 'Categoria corso';
 $string['credits'] = 'Credits';
-$string['download'] = 'Download';
-$string['issuedcertificates'] = 'All issued certificates';
+$string['download'] = 'Salva';
+$string['issuedcertificates'] = 'Attestati emessi';
+$string['allissuedcertificates'] = 'Tutti gli attestati';

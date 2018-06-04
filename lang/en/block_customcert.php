@@ -33,3 +33,4 @@ $string['category'] = 'Course category';
 $string['credits'] = 'Credits';
 $string['download'] = 'Download';
 $string['issuedcertificates'] = 'All issued certificates';
+$string['allissuedcertificates'] = 'All issued certificates';
