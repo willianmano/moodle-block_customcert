@@ -71,7 +71,7 @@ class block implements renderable, templatable {
                     'cmid' => $certificate->cmid,
                     'code' => $certificate->code,
                     'coursename' => mb_strimwidth($certificate->coursename, 0, 30, "..."),
-                    'name' => $certificate->name,
+                    'category' => $certificate->category,
                     'timecreated' => userdate($certificate->timecreated,$dateformat)
                 ];
             }

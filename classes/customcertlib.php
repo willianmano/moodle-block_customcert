@@ -44,12 +44,13 @@ class customcertlib {
     public static function get_certificates($limit = null) {
         global $DB, $USER;
 
-        $sql = "SELECT ci.id, cm.id as cmid, ci.code, co.fullname as coursename, c.name, ci.timecreated
+        $sql = "SELECT ci.id, cm.id as cmid, ci.code, co.fullname as coursename, c.name, cc.name as category, ci.timecreated
                 FROM {customcert_issues} ci
                 INNER JOIN {customcert} c ON c.id = ci.customcertid
                 INNER JOIN {course_modules} cm ON cm.instance = c.id
                 INNER JOIN {modules} m ON cm.module = m.id
                 INNER JOIN {course} co ON co.id = cm.course
+                INNER JOIN {course_categories} cc ON cc.id = co.category
                 WHERE ci.userid = :userid AND m.name = 'customcert'
                 ORDER BY ci.timecreated DESC";
 
